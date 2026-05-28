@@ -1,26 +1,38 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  --color-peko-red: #b80026;
+  --color-peko-cream: #f3e3d1;
+  --color-peko-blue: #02001c;
+  --font-japanese: "ta-kaku-shadow", sans-serif;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: "roca", sans-serif;
+  background-color: #f3e3d1;
+  color: #02001c;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 22s linear infinite;
+  will-change: transform;
+}
+
+/* Hide content while web fonts load to prevent FOUT */
+.wf-loading body {
+  opacity: 0;
+}
+.wf-active body,
+.wf-inactive body {
+  opacity: 1;
+  transition: opacity 0.2s ease;
 }
