@@ -29,7 +29,7 @@ export default function ContactForm() {
       <div className="relative max-w-2xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <p className="text-white/50 font-bold text-xs tracking-[0.5em] uppercase mb-3" style={{ fontFamily: "var(--font-japanese), sans-serif" }}>
+          <p className="text-white/50 font-bold text-lg tracking-[0.5em] uppercase mb-3" style={{ fontFamily: "var(--font-japanese), sans-serif" }}>
             連絡
           </p>
           <h2 className="text-white font-black text-5xl sm:text-6xl uppercase tracking-tight">

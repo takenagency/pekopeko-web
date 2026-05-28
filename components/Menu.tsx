@@ -125,13 +125,13 @@ function CategoryHeader({
     <div className="relative text-center mb-10">
       <span
         className="absolute inset-0 flex items-center justify-center text-peko-blue/5 font-black pointer-events-none select-none leading-none"
-        style={{ fontSize: "7rem", fontFamily: "var(--font-japanese), sans-serif" }}
+        style={{ fontSize: "11rem", fontFamily: "var(--font-japanese), sans-serif" }}
       >
         {kanji}
       </span>
       <div className="relative flex items-center gap-4 justify-center">
         <div className="h-px flex-1 max-w-24 bg-peko-red/30" />
-        <h3 className="text-peko-red font-black text-xs tracking-[0.4em] uppercase">
+        <h3 className="text-peko-red font-black text-sm tracking-[0.4em] uppercase">
           {title}
         </h3>
         <div className="h-px flex-1 max-w-24 bg-peko-red/30" />
@@ -147,7 +147,7 @@ export default function Menu() {
         {/* Section header */}
         <div className="text-center mb-16">
           <p
-            className="text-peko-red font-bold text-xs tracking-[0.5em] uppercase mb-3"
+            className="text-peko-red font-bold text-lg tracking-[0.5em] uppercase mb-3"
             style={{ fontFamily: "var(--font-japanese), sans-serif" }}
           >
             ペコペコ
@@ -160,7 +160,7 @@ export default function Menu() {
             <div className="w-2 h-2 rounded-full bg-peko-red" />
             <div className="h-px w-12 bg-peko-red/40" />
           </div>
-          <p className="text-gray-500 text-sm mt-4 max-w-md mx-auto leading-relaxed">
+          <p className="text-gray-500 text-lg mt-4 max-w-lg mx-auto leading-relaxed">
             Ingredientes frescos, técnicas tradicionales y el auténtico sabor japonés en cada bocado.
           </p>
         </div>

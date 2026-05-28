@@ -11,7 +11,7 @@ export default function Location() {
         {/* Header */}
         <div className="text-center mb-16">
           <p
-            className="text-peko-cream/50 font-bold text-xs tracking-[0.5em] uppercase mb-3"
+            className="text-peko-cream/50 font-bold text-lg tracking-[0.5em] uppercase mb-3"
             style={{ fontFamily: "var(--font-japanese), sans-serif" }}
           >
             場所

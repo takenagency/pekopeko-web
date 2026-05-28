@@ -9,7 +9,7 @@ export default function Delivery() {
       </div>
 
       <div className="relative max-w-3xl mx-auto text-center">
-        <p className="text-peko-red font-bold text-xs tracking-[0.5em] uppercase mb-3" style={{ fontFamily: "var(--font-japanese), sans-serif" }}>
+        <p className="text-peko-red font-bold text-lg tracking-[0.5em] uppercase mb-3" style={{ fontFamily: "var(--font-japanese), sans-serif" }}>
           配達
         </p>
         <h2 className="text-peko-blue font-black text-5xl sm:text-6xl uppercase tracking-tight mb-4">
