@@ -2,6 +2,8 @@
 
 import { useActionState } from "react";
 import { submitContact } from "@/app/actions";
+import Image from "next/image";
+import AnimateIn from "@/components/AnimateIn";
 
 export default function ContactForm() {
   const [state, formAction, isPending] = useActionState(submitContact, null);
@@ -29,20 +31,26 @@ export default function ContactForm() {
       <div className="relative max-w-2xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <p className="text-white/50 font-bold text-lg tracking-[0.5em] uppercase mb-3" style={{ fontFamily: "var(--font-japanese), sans-serif" }}>
-            連絡
-          </p>
-          <h2 className="text-white font-black text-5xl sm:text-6xl uppercase tracking-tight">
-            Contacto
-          </h2>
-          <div className="flex items-center justify-center gap-3 mt-4">
-            <div className="h-px w-12 bg-white/30" />
-            <div className="w-2 h-2 rounded-full bg-white/60" />
-            <div className="h-px w-12 bg-white/30" />
-          </div>
-          <p className="text-white/70 text-sm mt-4 leading-relaxed">
-            ¿Tenés alguna consulta? Escribinos y te respondemos a la brevedad.
-          </p>
+          <AnimateIn>
+            <p className="text-white/50 font-bold text-3xl tracking-[0.5em] uppercase mb-3" style={{ fontFamily: "var(--font-japanese), sans-serif" }}>
+              連絡
+            </p>
+          </AnimateIn>
+          <AnimateIn delay={100}>
+            <h2 className="text-white font-black text-5xl sm:text-6xl uppercase tracking-tight">
+              Contacto
+            </h2>
+          </AnimateIn>
+          <AnimateIn delay={200}>
+            <div className="flex items-center justify-center gap-3 mt-4">
+              <div className="h-px w-12 bg-white/30" />
+              <div className="w-2 h-2 rounded-full bg-white/60" />
+              <div className="h-px w-12 bg-white/30" />
+            </div>
+            <p className="text-white/70 text-xl sm:text-2xl mt-4 leading-relaxed">
+              ¿Tenés alguna consulta? Escribinos y te respondemos a la brevedad.
+            </p>
+          </AnimateIn>
         </div>
 
         {state?.success ? (
@@ -115,7 +123,7 @@ export default function ContactForm() {
             <button
               type="submit"
               disabled={isPending}
-              className="w-full bg-white text-peko-red font-black text-xs tracking-[0.3em] uppercase py-4 hover:bg-peko-cream transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
+              className="w-full bg-white text-peko-red font-black text-xs tracking-[0.3em] uppercase py-4 rounded-lg hover:bg-peko-cream transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {isPending ? "Enviando..." : "Enviar Mensaje"}
             </button>

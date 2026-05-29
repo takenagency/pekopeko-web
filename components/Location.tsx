@@ -1,8 +1,11 @@
+import Image from "next/image";
+import AnimateIn from "@/components/AnimateIn";
+
 export default function Location() {
   const hours = [
-    { day: "Lunes — Jueves", time: "12:00 – 22:00" },
-    { day: "Viernes — Sábado", time: "12:00 – 23:00" },
-    { day: "Domingo", time: "12:00 – 22:00" },
+    { day: "Lunes — Miércoles", time: "11:30 – 23:30hs" },
+    { day: "Jueves — Sábado", time: "11:30 – 00:30hs" },
+    { day: "Domingo", time: "11:30 – 23:30hs" },
   ];
 
   return (
@@ -10,20 +13,26 @@ export default function Location() {
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <p
-            className="text-peko-cream/50 font-bold text-lg tracking-[0.5em] uppercase mb-3"
-            style={{ fontFamily: "var(--font-japanese), sans-serif" }}
-          >
-            場所
-          </p>
-          <h2 className="text-white font-black text-5xl sm:text-6xl uppercase tracking-tight">
-            Dónde Estamos
-          </h2>
-          <div className="flex items-center justify-center gap-3 mt-4">
-            <div className="h-px w-12 bg-peko-red/60" />
-            <div className="w-2 h-2 rounded-full bg-peko-red" />
-            <div className="h-px w-12 bg-peko-red/60" />
-          </div>
+          <AnimateIn>
+            <p
+              className="text-peko-cream/50 font-bold text-3xl tracking-[0.5em] uppercase mb-3"
+              style={{ fontFamily: "var(--font-japanese), sans-serif" }}
+            >
+              場所
+            </p>
+          </AnimateIn>
+          <AnimateIn delay={100}>
+            <h2 className="text-white font-black text-5xl sm:text-6xl uppercase tracking-tight">
+              Dónde Estamos
+            </h2>
+          </AnimateIn>
+          <AnimateIn delay={200}>
+            <div className="flex items-center justify-center gap-3 mt-4">
+              <div className="h-px w-12 bg-peko-red/60" />
+              <div className="w-2 h-2 rounded-full bg-peko-red" />
+              <div className="h-px w-12 bg-peko-red/60" />
+            </div>
+          </AnimateIn>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-10 items-stretch">
@@ -65,11 +74,11 @@ export default function Location() {
                 </h3>
               </div>
               <p className="text-white/80 text-base leading-relaxed pl-11">
-                Barrio Chino
+                Pasaje ViaViva
                 <br />
-                Belgrano, Buenos Aires
+                Mendoza 1730, CABA
                 <br />
-                Argentina
+                Barrio Chino, Belgrano
               </p>
               <a
                 href="https://maps.app.goo.gl/BAGyNWpQKD8ksgYL8"
@@ -118,35 +127,6 @@ export default function Location() {
               </div>
             </div>
 
-            {/* Instagram */}
-            <div>
-              <div className="flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-peko-red flex items-center justify-center flex-shrink-0">
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="white"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                    <circle cx="12" cy="12" r="4" />
-                    <circle cx="17.5" cy="6.5" r="0.5" fill="white" />
-                  </svg>
-                </div>
-                <a
-                  href="https://www.instagram.com/pekopeko.ar/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-peko-cream font-black text-xs tracking-[0.25em] uppercase hover:text-white transition-colors"
-                >
-                  @pekopeko.ar
-                </a>
-              </div>
-            </div>
           </div>
         </div>
       </div>

@@ -44,7 +44,7 @@ export default function Navbar() {
             <a
               key={label}
               href={href}
-              className="text-white text-xs font-bold tracking-[0.2em] uppercase hover:text-peko-cream transition-colors"
+              className="text-white text-xs font-black tracking-[0.2em] uppercase hover:text-peko-cream transition-colors"
             >
               {label}
             </a>
@@ -88,7 +88,7 @@ export default function Navbar() {
               key={label}
               href={href}
               onClick={() => setOpen(false)}
-              className="block py-3 text-white text-sm font-bold tracking-[0.2em] uppercase hover:text-peko-cream border-b border-white/10 last:border-0"
+              className="block py-3 text-white text-sm font-black tracking-[0.2em] uppercase hover:text-peko-cream border-b border-white/10 last:border-0"
             >
               {label}
             </a>

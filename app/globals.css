@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
 @theme {
-  --color-peko-red: #b80026;
+  --color-peko-red: #910f0f;
   --color-peko-cream: #f3e3d1;
   --color-peko-blue: #02001c;
   --font-japanese: "ta-kaku-shadow", sans-serif;

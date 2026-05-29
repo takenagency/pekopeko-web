@@ -43,13 +43,13 @@ export default function Hero() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="#menu"
-            className="bg-peko-red text-white font-black text-xs tracking-[0.3em] uppercase px-10 py-4 hover:opacity-90 transition-opacity duration-200"
+            className="bg-peko-red text-white font-black text-xs tracking-[0.3em] uppercase px-10 py-4 rounded-lg hover:opacity-90 transition-opacity duration-200"
           >
             Ver Menú
           </a>
           <a
             href="#ubicacion"
-            className="border-2 border-white/60 text-white font-bold text-xs tracking-[0.3em] uppercase px-10 py-4 hover:bg-white/10 hover:border-white transition-all duration-200"
+            className="border-2 border-white/60 text-white font-black text-xs tracking-[0.3em] uppercase px-10 py-4 rounded-lg hover:bg-white/10 hover:border-white transition-all duration-200"
           >
             Cómo Llegar
           </a>

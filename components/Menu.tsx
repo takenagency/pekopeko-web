@@ -1,4 +1,5 @@
 import Image from "next/image";
+import AnimateIn from "@/components/AnimateIn";
 
 const clasicos = [
   {
@@ -83,32 +84,37 @@ function MenuCard({
   accent: string;
 }) {
   return (
-    <div className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-shadow duration-300 flex flex-col">
-      {/* Image */}
-      <div className="relative h-52 overflow-hidden bg-peko-cream">
-        <Image
-          src={image}
-          alt={name}
-          fill
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
-        <div
-          className="absolute top-3 left-3 text-white text-[10px] font-black tracking-[0.2em] uppercase px-3 py-1"
-          style={{ backgroundColor: accent }}
-        >
-          Promo {id}
-        </div>
+    <div className="group relative aspect-[4/5] overflow-hidden rounded-2xl shadow-lg">
+      {/* Full-bleed photo */}
+      <Image
+        src={image}
+        alt={name}
+        fill
+        className="object-cover group-hover:scale-105 transition-transform duration-600 ease-out"
+        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+      />
+
+      {/* Promo badge */}
+      <div
+        className="absolute top-3 left-3 text-white text-[10px] font-black tracking-[0.2em] uppercase px-3 py-1 rounded-md z-10"
+        style={{ backgroundColor: accent }}
+      >
+        Promo {id}
       </div>
 
-      {/* Content */}
-      <div className="p-5 flex flex-col flex-1">
-        <h3 className="font-black text-lg text-peko-blue leading-tight mb-2">
+      {/* Gradient overlay */}
+      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+
+      {/* Text — name always visible, description slides up on hover */}
+      <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
+        <h3 className="font-black text-white text-base sm:text-lg leading-tight">
           {name}
         </h3>
-        <p className="text-sm text-gray-500 leading-relaxed flex-1">
-          {description}
-        </p>
+        <div className="max-h-0 overflow-hidden group-hover:max-h-32 transition-all duration-500 ease-in-out">
+          <p className="text-white/80 text-sm leading-relaxed mt-2">
+            {description}
+          </p>
+        </div>
       </div>
     </div>
   );
@@ -123,64 +129,83 @@ function CategoryHeader({
 }) {
   return (
     <div className="relative text-center mb-10">
-      <span
-        className="absolute inset-0 flex items-center justify-center text-peko-blue/5 font-black pointer-events-none select-none leading-none"
-        style={{ fontSize: "11rem", fontFamily: "var(--font-japanese), sans-serif" }}
-      >
-        {kanji}
-      </span>
-      <div className="relative flex items-center gap-4 justify-center">
-        <div className="h-px flex-1 max-w-24 bg-peko-red/30" />
-        <h3 className="text-peko-red font-black text-sm tracking-[0.4em] uppercase">
+      <div className="flex items-center gap-4 justify-center">
+        <div className="h-px flex-1 max-w-24 bg-peko-cream/30" />
+        <h3 className="text-peko-cream font-black text-sm tracking-[0.4em] uppercase">
           {title}
         </h3>
-        <div className="h-px flex-1 max-w-24 bg-peko-red/30" />
+        <div className="h-px flex-1 max-w-24 bg-peko-cream/30" />
       </div>
     </div>
   );
 }
 
+
 export default function Menu() {
   return (
-    <section id="menu" className="bg-peko-cream py-24 px-4 sm:px-8">
-      <div className="max-w-7xl mx-auto">
+    <section
+      id="menu"
+      className="py-24 px-4 sm:px-8 relative overflow-hidden"
+      style={{ backgroundColor: "var(--color-peko-red)" }}
+    >
+      {/* Grain texture */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`,
+          opacity: 0.09,
+          mixBlendMode: "overlay",
+        }}
+      />
+
+      <div className="max-w-7xl mx-auto relative z-10">
         {/* Section header */}
         <div className="text-center mb-16">
-          <p
-            className="text-peko-red font-bold text-lg tracking-[0.5em] uppercase mb-3"
-            style={{ fontFamily: "var(--font-japanese), sans-serif" }}
-          >
-            ペコペコ
-          </p>
-          <h2 className="text-peko-blue font-black text-5xl sm:text-6xl uppercase tracking-tight">
-            Nuestro Menú
-          </h2>
-          <div className="flex items-center justify-center gap-3 mt-4">
-            <div className="h-px w-12 bg-peko-red/40" />
-            <div className="w-2 h-2 rounded-full bg-peko-red" />
-            <div className="h-px w-12 bg-peko-red/40" />
-          </div>
-          <p className="text-gray-500 text-lg mt-4 max-w-lg mx-auto leading-relaxed">
-            Ingredientes frescos, técnicas tradicionales y el auténtico sabor japonés en cada bocado.
-          </p>
+          <AnimateIn>
+            <p
+              className="text-peko-cream/70 font-bold text-3xl tracking-[0.5em] uppercase mb-3"
+              style={{ fontFamily: "var(--font-japanese), sans-serif" }}
+            >
+              ペコペコ
+            </p>
+          </AnimateIn>
+          <AnimateIn delay={100}>
+            <h2 className="text-peko-cream font-black text-5xl sm:text-6xl uppercase tracking-tight">
+              Nuestro Menú
+            </h2>
+          </AnimateIn>
+          <AnimateIn delay={200}>
+            <div className="flex items-center justify-center gap-3 mt-4">
+              <div className="h-px w-12 bg-peko-cream/40" />
+              <div className="w-2 h-2 rounded-full bg-peko-cream" />
+              <div className="h-px w-12 bg-peko-cream/40" />
+            </div>
+            <p className="text-peko-cream/70 text-lg mt-4 max-w-lg mx-auto leading-relaxed">
+              Ingredientes frescos, técnicas tradicionales y el auténtico sabor japonés en cada bocado.
+            </p>
+          </AnimateIn>
         </div>
 
         {/* Clásicos */}
         <div className="mb-16">
-          <CategoryHeader title="Platos Clásicos" kanji="食" />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {clasicos.map((item) => (
-              <MenuCard key={item.id} {...item} accent="#b80026" />
+          <AnimateIn><CategoryHeader title="Platos Clásicos" kanji="食" /></AnimateIn>
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {clasicos.map((item, i) => (
+              <AnimateIn key={item.id} delay={i * 80} className="">
+                <MenuCard {...item} accent="#910f0f" />
+              </AnimateIn>
             ))}
           </div>
         </div>
 
         {/* Sushi */}
         <div>
-          <CategoryHeader title="Sushi Japonés" kanji="鮨" />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {sushi.map((item) => (
-              <MenuCard key={item.id} {...item} accent="#02001c" />
+          <AnimateIn><CategoryHeader title="Sushi Japonés" kanji="鮨" /></AnimateIn>
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+            {sushi.map((item, i) => (
+              <AnimateIn key={item.id} delay={i * 80} className="">
+                <MenuCard {...item} accent="#02001c" />
+              </AnimateIn>
             ))}
           </div>
         </div>

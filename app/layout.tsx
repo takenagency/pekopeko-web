@@ -3,9 +3,12 @@ import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Peko Peko | Gastronomía Japonesa — Barrio Chino, Buenos Aires",
+  title: "Peko Peko | Autentica Comida Japonesa en Barrio Chino",
   description:
-    "El mejor local de comida japonesa al paso en el Barrio Chino de Buenos Aires. Sushi, Gyozas, Karaage, Yakisoba y mucho más.",
+    "Tu parada obligada en el Barrio Chino. Encontranos en el Pasaje ViaViva con Onigiri, Sushi, Yakitori, Mochi y todo el sabor tradicional de Japón al paso. Abierto todos los dias. Mendoza 1730 (CABA)",
+  icons: {
+    icon: "/PekoPekoWebFavicon2.svg",
+  },
 };
 
 export default function RootLayout({

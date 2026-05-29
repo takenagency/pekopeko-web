@@ -1,79 +1,100 @@
-import Image from "next/image";
+import AnimateIn from "@/components/AnimateIn";
 
-const photos = [
-  { src: "/1.-Onigiri-+-2-Yakitoris.png", alt: "Onigiri + Yakitoris" },
-  { src: "/2.-Karaage-Japonés.png", alt: "Karaage Japonés" },
-  { src: "/6.-Sushi-Tradicional-9-Piezas.png", alt: "Sushi Tradicional" },
-  { src: "/4.-Gyoza-Japonés-X-7u.png", alt: "Gyozas" },
-  { src: "/7.-Sushi-Hot-6-Piezas.png", alt: "Sushi Hot" },
-  { src: "/12-Torishoga-(pollo-Al-Jengibre-Estilo-Japonés).png", alt: "Torishoga" },
-];
+interface PostSize {
+  height: number | null;
+  width: number | null;
+  mediaUrl: string;
+}
 
-export default function InstagramSection() {
+interface Post {
+  id: string;
+  permalink: string;
+  mediaUrl: string;
+  mediaType: string;
+  prunedCaption: string;
+  sizes: {
+    small: PostSize;
+    medium: PostSize;
+    large: PostSize;
+    full: PostSize;
+  };
+}
+
+async function getPosts(): Promise<Post[]> {
+  const url = process.env.BEHOLD_FEED_URL;
+  if (!url) return [];
+  try {
+    const res = await fetch(url, { next: { revalidate: 3600 } });
+    if (!res.ok) return [];
+    const data = await res.json();
+    return (data.posts ?? []).slice(0, 6);
+  } catch {
+    return [];
+  }
+}
+
+function getImageUrl(post: Post): string {
+  // Prefer Behold's stable CDN over Instagram's expiring URLs
+  return post.sizes?.medium?.mediaUrl || post.sizes?.large?.mediaUrl || post.mediaUrl;
+}
+
+export default async function InstagramSection() {
+  const posts = await getPosts();
+
   return (
     <section id="instagram" className="bg-white py-24 px-4 sm:px-8">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-12">
-          <p className="text-peko-red font-bold text-xs tracking-[0.5em] uppercase mb-3">
-            Instagram
-          </p>
-          <h2 className="text-peko-blue font-black text-5xl sm:text-6xl uppercase tracking-tight">
-            Seguinos
-          </h2>
-          <div className="flex items-center justify-center gap-3 mt-4 mb-4">
-            <div className="h-px w-12 bg-peko-red/40" />
-            <div className="w-2 h-2 rounded-full bg-peko-red" />
-            <div className="h-px w-12 bg-peko-red/40" />
-          </div>
-          <a
-            href="https://www.instagram.com/pekopeko.ar/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-gray-400 font-medium text-sm hover:text-peko-red transition-colors"
-          >
-            @pekopeko.ar
-          </a>
+          <AnimateIn>
+            <h2 className="text-peko-blue font-black text-5xl sm:text-6xl uppercase tracking-tight">
+              Seguinos en Instagram
+            </h2>
+          </AnimateIn>
         </div>
 
         {/* Photo grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 mb-10">
-          {photos.map(({ src, alt }) => (
-            <a
-              key={src}
-              href="https://www.instagram.com/pekopeko.ar/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative aspect-square overflow-hidden bg-peko-cream"
-            >
-              <Image
-                src={src}
-                alt={alt}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
-                sizes="(max-width: 640px) 50vw, 33vw"
-              />
-              {/* Hover overlay */}
-              <div className="absolute inset-0 bg-peko-red/0 group-hover:bg-peko-red/60 transition-all duration-300 flex items-center justify-center">
-                <svg
-                  className="text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  width="32"
-                  height="32"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                  <circle cx="12" cy="12" r="4" />
-                  <circle cx="17.5" cy="6.5" r="0.5" fill="white" />
-                </svg>
-              </div>
-            </a>
-          ))}
-        </div>
+        {posts.length > 0 ? (
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 sm:gap-3 mb-10">
+            {posts.map((post) => (
+              <a
+                key={post.id}
+                href={post.permalink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative aspect-square overflow-hidden bg-peko-cream block"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={getImageUrl(post)}
+                  alt={post.prunedCaption ?? "Peko Peko"}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+                {/* Hover overlay */}
+                <div className="absolute inset-0 bg-peko-red/0 group-hover:bg-peko-red/60 transition-all duration-300 flex items-end p-3">
+                  <p className="text-white text-xs leading-snug opacity-0 group-hover:opacity-100 transition-opacity duration-300 line-clamp-3">
+                    {post.prunedCaption}
+                  </p>
+                </div>
+                {/* Carousel badge */}
+                {post.mediaType === "CAROUSEL_ALBUM" && (
+                  <div className="absolute top-2 right-2 bg-black/40 rounded p-1">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="white">
+                      <rect x="2" y="2" width="9" height="9" rx="1" />
+                      <rect x="13" y="2" width="9" height="9" rx="1" />
+                      <rect x="2" y="13" width="9" height="9" rx="1" />
+                      <rect x="13" y="13" width="9" height="9" rx="1" />
+                    </svg>
+                  </div>
+                )}
+              </a>
+            ))}
+          </div>
+        ) : (
+          <p className="text-center text-gray-400 text-sm mb-10">
+            No se pudieron cargar las publicaciones.
+          </p>
+        )}
 
         {/* CTA */}
         <div className="text-center">
@@ -81,18 +102,9 @@ export default function InstagramSection() {
             href="https://www.instagram.com/pekopeko.ar/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 bg-peko-blue text-white font-black text-xs tracking-[0.3em] uppercase px-10 py-4 hover:bg-peko-red transition-colors duration-300"
+            className="inline-flex items-center gap-3 bg-peko-blue text-white font-black text-xs tracking-[0.3em] uppercase px-10 py-4 rounded-lg hover:bg-peko-red transition-colors duration-300"
           >
-            <svg
-              width="18"
-              height="18"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
               <circle cx="12" cy="12" r="4" />
               <circle cx="17.5" cy="6.5" r="0.5" fill="white" />
