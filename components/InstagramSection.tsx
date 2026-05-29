@@ -20,11 +20,11 @@ interface Post {
   };
 }
 
+const BEHOLD_FEED_URL = "https://feeds.behold.so/UUFMxwbPVe0iBgqgXWDM";
+
 async function getPosts(): Promise<Post[]> {
-  const url = process.env.BEHOLD_FEED_URL;
-  if (!url) return [];
   try {
-    const res = await fetch(url, { next: { revalidate: 3600 } });
+    const res = await fetch(BEHOLD_FEED_URL, { next: { revalidate: 3600 } });
     if (!res.ok) return [];
     const data = await res.json();
     return (data.posts ?? []).slice(0, 6);

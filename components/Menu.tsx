@@ -1,5 +1,6 @@
 import Image from "next/image";
 import AnimateIn from "@/components/AnimateIn";
+import MenuCard from "@/components/MenuCard";
 
 const clasicos = [
   {
@@ -70,55 +71,6 @@ const sushi = [
   },
 ];
 
-function MenuCard({
-  id,
-  name,
-  description,
-  image,
-  accent,
-}: {
-  id: number;
-  name: string;
-  description: string;
-  image: string;
-  accent: string;
-}) {
-  return (
-    <div className="group relative aspect-[4/5] overflow-hidden rounded-2xl shadow-lg">
-      {/* Full-bleed photo */}
-      <Image
-        src={image}
-        alt={name}
-        fill
-        className="object-cover group-hover:scale-105 transition-transform duration-600 ease-out"
-        sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
-      />
-
-      {/* Promo badge */}
-      <div
-        className="absolute top-3 left-3 text-white text-[10px] font-black tracking-[0.2em] uppercase px-3 py-1 rounded-md z-10"
-        style={{ backgroundColor: accent }}
-      >
-        Promo {id}
-      </div>
-
-      {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
-
-      {/* Text — name always visible, description slides up on hover */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
-        <h3 className="font-black text-white text-base sm:text-lg leading-tight">
-          {name}
-        </h3>
-        <div className="max-h-0 overflow-hidden group-hover:max-h-32 transition-all duration-500 ease-in-out">
-          <p className="text-white/80 text-sm leading-relaxed mt-2">
-            {description}
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-}
 
 function CategoryHeader({
   title,
